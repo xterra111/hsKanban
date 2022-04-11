@@ -3,6 +3,7 @@ import { Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import ColumnHeader from "./ColumnHeader";
 import TaskCard from "../Task/TaskCard";
+import AddTaskCardHolder from "../Task/AddTaskCardHolder";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -25,6 +26,7 @@ const Column = () => {
 				<TaskCard />
 				<TaskCard />
 				<TaskCard />
+				<AddTaskCardHolder />
 			</Paper>
 		</div>
 	);
