@@ -14,18 +14,15 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const Column = () => {
+const Column = ({ column }) => {
 	const paperStyle = useStyles();
 	return (
 		<div>
 			<Paper className={paperStyle.root}>
-				<ColumnHeader />
-				<TaskCard />
-				<TaskCard />
-				<TaskCard />
-				<TaskCard />
-				<TaskCard />
-				<TaskCard />
+				<ColumnHeader title={column.title} />
+				{column.taskCards.map((taskcard) => (
+					<TaskCard key={taskcard.id} taskcard={taskcard} />
+				))}
 				<AddTaskCardHolder />
 			</Paper>
 		</div>

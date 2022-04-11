@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const ColumnHeader = () => {
+const ColumnHeader = ({ title }) => {
 	const [updateTitle, setUpdateTitle] = useState(false);
 	const columnHeaderEdit = useStyles();
 	return (
@@ -32,7 +32,7 @@ const ColumnHeader = () => {
 						onBlur={() => setUpdateTitle(!updateTitle)}
 						inputProps={{ className: columnHeaderEdit.editinput }}
 						fullWidth
-						value="Column Backlog"
+						value={title}
 					/>
 				</div>
 			) : (
@@ -40,7 +40,7 @@ const ColumnHeader = () => {
 					<Typography
 						onClick={() => setUpdateTitle(!updateTitle)}
 						className={columnHeaderEdit.editHeader}>
-						Column Backlog
+						{title}
 					</Typography>
 				</div>
 			)}
