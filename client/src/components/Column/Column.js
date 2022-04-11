@@ -1,7 +1,8 @@
 import React from "react";
-import { Paper, Typography } from "@material-ui/core";
+import { Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import ColumnHeader from "./ColumnHeader";
+import TaskCard from "../Task/TaskCard";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -18,6 +19,12 @@ const Column = () => {
 		<div>
 			<Paper className={paperStyle.root}>
 				<ColumnHeader />
+				<TaskCard />
+				<TaskCard />
+				<TaskCard />
+				<TaskCard />
+				<TaskCard />
+				<TaskCard />
 			</Paper>
 		</div>
 	);

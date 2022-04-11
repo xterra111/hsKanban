@@ -68,3 +68,73 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+##TODO
+
+MVP FEATURES:
+
+1. [x] Build the Column Component
+
+2. [x] Build the task card component inside the column
+
+3. [x] Ability to edit the title of the column component
+
+4. [] Land on data Data to add a bunch of columns and task cards. Adding or removing data from the local store should update the front end on refresh
+
+5. [] Initialize the backend to reflect the data store once the above is done.
+
+6. [] Hook up front end to backend.
+
+7. [] test out backend create new, list all and update features using postman.
+
+8. [] Add Tasks to one column + update the backend.
+
+9. [] Add a new column + update the backend accordingly.
+
+10. [] Ensure new column title is editable.
+
+11. [] Drag Drop for Task Card in a column.
+
+12. [] ensure backend for drag drop is updated accordingly.
+
+13. [] Drag Drop Task Card from one column to another.
+
+14. [] Ensure backend for DND to another column reflects accordingly.
+
+15. [] DND Columns? - decide if this needs to be in post MVP...(really want to do this but lets see)
+
+POST MVP:
+
+To be divided in to seperate phases after. Below is a though dump of features.
+
+1.  [] integrate with Auth (Auth 0 or Google) to enable login.
+
+2.  [] Display data relevant to that user on login.
+
+3.  [] logout button
+
+4.  [] Add details to Task Card
+
+    4.1 [] clicking on the card opens a task card details modal where more information can be added.
+
+    4.2 [] - Implement an update button and a cancel button.
+
+    4.2 [] Add Description.
+
+    4.3 [] Task Due Date
+
+        4.3.1 [] implement a simple date add functionality
+
+        4.3.2 [] implement a data picker
+
+    4.4 [] Priority
+
+        4.4.1 [] Set Priority add a icon or ! based on priority.
+
+    4.5 [] Description - Add more detailed description of the task.
+
+    4.6 [] Attachments?
+
+    4.7 [] Labels?
+
+    4.8 [] ensure mobile view (iphone, ipad screen size)

@@ -1,12 +1,16 @@
 import React, { useState } from "react";
-import { FormHelperText, InputBase, Typography } from "@material-ui/core";
+import { InputBase, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-	editHeader: {
+	editHeaderMain: {
 		cursor: "pointer",
 		marginLeft: theme.spacing(1),
 		display: "flex",
+	},
+	editHeader: {
+		fontSize: "1.2rem",
+		fontWeight: "bold",
 	},
 	editinput: {
 		"&:focus": {
@@ -32,8 +36,10 @@ const ColumnHeader = () => {
 					/>
 				</div>
 			) : (
-				<div className={columnHeaderEdit.editHeader}>
-					<Typography onClick={() => setUpdateTitle(!updateTitle)}>
+				<div className={columnHeaderEdit.editHeaderMain}>
+					<Typography
+						onClick={() => setUpdateTitle(!updateTitle)}
+						className={columnHeaderEdit.editHeader}>
 						Column Backlog
 					</Typography>
 				</div>
