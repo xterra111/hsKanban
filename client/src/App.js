@@ -73,8 +73,42 @@ function App() {
 		setData(refreshedData);
 	};
 
+	const handleOnDragEnd = (result) => {
+		const { destination, source, draggableId } = result;
+
+		if (!result.destination) {
+			return;
+		}
+
+		const sourceColumn = data.columns[source.droppableId];
+		const destinationColumn = data.columns[destination.droppableId];
+		const selectedtaskCard = sourceColumn.taskCards.filter(
+			(taskCard) => taskCard.id === draggableId
+		)[0];
+
+		if (destination.droppableId === source.droppableId) {
+			sourceColumn.taskCards.splice(source.index, 1);
+			destinationColumn.taskCards.splice(
+				destination.index,
+				0,
+				selectedtaskCard
+			);
+
+			const refreshedData = {
+				...data,
+				columns: {
+					...data.columns,
+					[sourceColumn.id]: destinationColumn,
+				},
+			};
+			setData(refreshedData);
+
+			return;
+		}
+	};
+
 	return (
-		<DragDropContext>
+		<DragDropContext onDragEnd={handleOnDragEnd}>
 			<ContextHandler.Provider value={{ newAddTask, newAddColumn }}>
 				<div className={addListStyles.root}>
 					{data.columnIds.map((columnId) => {
