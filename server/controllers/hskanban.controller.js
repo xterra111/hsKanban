@@ -20,4 +20,19 @@ module.exports = {
 				res.status(400).json(err);
 			});
 	},
+	updateExistingHSKanban: (request, response) => {
+		HsKanban.findByIdAndUpdate({ _id: request.params.id }, request.body, {
+			new: true,
+			runValidators: true,
+		})
+			.then((data) => {
+				response.json({
+					data,
+				});
+			})
+			.catch((err) => {
+				console.log("Update - Something went wrong");
+				response.status(400).json(err);
+			});
+	},
 };

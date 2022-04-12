@@ -1,11 +1,9 @@
-const HsKanbanController = require("../controllers/");
+const HsKanbanController = require("../controllers/hsKanban.controller");
 
 module.exports = (app) => {
 	//Route to set so that we can get all of the items.
-	app.get("/api/pets", petShelterController.findAllPets);
-	app.get("/api/pets/:id", petShelterController.onePetDetail);
-	app.post("/api/pets", petShelterController.createPets);
-	app.put("/api/pets/edit/:id", petShelterController.updateExistingPet);
+	app.get("/api/alltaskcards", HsKanbanController.listAllHSKanban);
 
-	app.delete("/api/pets/:id", petShelterController.deleteExistingPet);
+	app.post("/api/newcard", HsKanbanController.createHsKanban);
+	app.put("/api/edit/:id", HsKanbanController.updateExistingHSKanban);
 };
