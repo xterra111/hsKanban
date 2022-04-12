@@ -79,7 +79,7 @@ MVP FEATURES:
 
 3. [x] Ability to edit the title of the column component
 
-4. [x] Land on data Data to add a bunch of columns and task cards. Adding or removing data from the local store should update the front end on refresh
+4. [x] Land on Data format to add a bunch of columns and task cards. Adding or removing data from the local store should update the front end on refresh
 
 5. [] Initialize the backend to reflect the data store once the above is done.
 
@@ -87,21 +87,23 @@ MVP FEATURES:
 
 7. [] test out backend create new, list all and update features using postman.
 
-8. [] Add Tasks to one column + update the backend.
+8. [0.5] Add Tasks to one column + update the backend.
 
-9. [] Add a new column + update the backend accordingly.
+9. [0.5] Add a new column + update the backend accordingly.
 
 10. [] Ensure new column title is editable.
 
 11. [] Drag Drop for Task Card in a column.
 
-12. [] ensure backend for drag drop is updated accordingly.
+12. [] Drag and Drop tasks from one column to another.
 
-13. [] Drag Drop Task Card from one column to another.
+13. [] ensure backend for drag drop is updated accordingly.
 
-14. [] Ensure backend for DND to another column reflects accordingly.
+14. [] Drag Drop Task Card from one column to another.
 
-15. [] DND Columns? - decide if this needs to be in post MVP...(really want to do this but lets see)
+15. [] Ensure backend for DND to another column reflects accordingly.
+
+16. [] DND Columns? - decide if this needs to be in post MVP...(really want to do this but lets see)
 
 POST MVP:
 

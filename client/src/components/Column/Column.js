@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import ColumnHeader from "./ColumnHeader";
 import TaskCard from "../Task/TaskCard";
 import AddTaskCardHolder from "../Task/AddTaskCardHolder";
+import { Droppable } from "react-beautiful-dnd";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -20,9 +21,18 @@ const Column = ({ column }) => {
 		<div>
 			<Paper className={paperStyle.root}>
 				<ColumnHeader title={column.title} />
-				{column.taskCards.map((taskcard) => (
-					<TaskCard key={taskcard.id} taskcard={taskcard} />
-				))}
+
+				<Droppable droppableId={column.id}>
+					{(provided) => (
+						<div ref={provided.innerRef} {...provided.droppableProps}>
+							{column.taskCards.map((taskcard, index) => (
+								<TaskCard key={taskcard.id} taskcard={taskcard} index={index} />
+							))}
+							{provided.placeholder}
+						</div>
+					)}
+				</Droppable>
+
 				<AddTaskCardHolder columnId={column.id} itemtype="taskcard" />
 			</Paper>
 		</div>

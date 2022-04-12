@@ -10,11 +10,14 @@ import AddTaskCardHolder from "./components/Task/AddTaskCardHolder";
 
 import { makeStyles } from "@material-ui/core/styles";
 
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+
 // Set the Styling for the List creation portion
 
 const useStyles = makeStyles((theme) => ({
 	root: {
 		display: "flex",
+		overflowY: "auto",
 	},
 }));
 
@@ -71,16 +74,18 @@ function App() {
 	};
 
 	return (
-		<ContextHandler.Provider value={{ newAddTask, newAddColumn }}>
-			<div className={addListStyles.root}>
-				{data.columnIds.map((columnId) => {
-					const column = data.columns[columnId];
-					return <Column column={column} key={columnId} />;
-				})}
+		<DragDropContext>
+			<ContextHandler.Provider value={{ newAddTask, newAddColumn }}>
+				<div className={addListStyles.root}>
+					{data.columnIds.map((columnId) => {
+						const column = data.columns[columnId];
+						return <Column column={column} key={columnId} />;
+					})}
 
-				<AddTaskCardHolder itemtype="column" />
-			</div>
-		</ContextHandler.Provider>
+					<AddTaskCardHolder itemtype="column" />
+				</div>
+			</ContextHandler.Provider>
+		</DragDropContext>
 	);
 }
 
