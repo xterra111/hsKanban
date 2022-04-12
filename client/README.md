@@ -79,7 +79,7 @@ MVP FEATURES:
 
 3. [x] Ability to edit the title of the column component
 
-4. [] Land on data Data to add a bunch of columns and task cards. Adding or removing data from the local store should update the front end on refresh
+4. [x] Land on data Data to add a bunch of columns and task cards. Adding or removing data from the local store should update the front end on refresh
 
 5. [] Initialize the backend to reflect the data store once the above is done.
 

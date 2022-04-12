@@ -19,7 +19,7 @@ const data = {
 	columns: {
 		"column-1": {
 			id: "column-1",
-			title: "randoms",
+			title: "Backlog",
 			taskCards,
 		},
 	},

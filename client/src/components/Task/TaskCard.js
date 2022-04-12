@@ -14,6 +14,7 @@ const TaskCard = ({ taskcard }) => {
 	const cardTaskStyle = useStyles();
 	return (
 		<div>
+			{/* Displaying the Card heading here */}
 			<Paper className={cardTaskStyle.cardTask}>{taskcard.heading}</Paper>
 		</div>
 	);

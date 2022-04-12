@@ -23,7 +23,7 @@ const Column = ({ column }) => {
 				{column.taskCards.map((taskcard) => (
 					<TaskCard key={taskcard.id} taskcard={taskcard} />
 				))}
-				<AddTaskCardHolder />
+				<AddTaskCardHolder columnId={column.id} itemtype="taskcard" />
 			</Paper>
 		</div>
 	);

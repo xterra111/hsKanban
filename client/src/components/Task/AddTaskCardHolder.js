@@ -12,24 +12,34 @@ const useStyles = makeStyles((theme) => ({
 		},
 	},
 	addcarddiv: {
-		marginTop: theme.spacing(5),
+		width: "300px",
+		marginTop: theme.spacing(1),
 	},
 }));
 
-const AddTaskCardHolder = () => {
+const AddTaskCardHolder = ({ columnId, itemtype }) => {
 	const addtaskhldr = useStyles();
 	const [expand, setExpand] = useState(false);
 	return (
 		<div className={addtaskhldr.addcarddiv}>
+			{/* The below lets you expand the collapse and display the Add Task component
+            Passing the columnId as a prop to the AddTask component */}
+
 			<Collapse in={expand}>
-				<AddTask setExpand={setExpand} />
+				<AddTask
+					setExpand={setExpand}
+					columnId={columnId}
+					itemtype={itemtype}
+				/>
 			</Collapse>
 
 			<Collapse in={!expand}>
 				<Paper
 					className={addtaskhldr.addcrdhldr}
 					onClick={() => setExpand(!expand)}>
-					<Typography>Add Card</Typography>
+					<Typography>
+						{itemtype === "taskcard" ? "Add Task Card" : "Add New Column"}
+					</Typography>
 				</Paper>
 			</Collapse>
 		</div>
