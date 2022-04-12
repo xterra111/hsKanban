@@ -10,7 +10,7 @@ import AddTaskCardHolder from "./components/Task/AddTaskCardHolder";
 
 import { makeStyles } from "@material-ui/core/styles";
 
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { DragDropContext } from "react-beautiful-dnd";
 
 // Set the Styling for the List creation portion
 
@@ -102,8 +102,23 @@ function App() {
 				},
 			};
 			setData(refreshedData);
+		} else {
+			sourceColumn.taskCards.splice(source.index, 1);
+			destinationColumn.taskCards.splice(
+				destination.index,
+				0,
+				selectedtaskCard
+			);
 
-			return;
+			const refreshedData = {
+				...data,
+				columns: {
+					...data.columns,
+					[sourceColumn.id]: sourceColumn,
+					[destinationColumn.id]: destinationColumn,
+				},
+			};
+			setData(refreshedData);
 		}
 	};
 
