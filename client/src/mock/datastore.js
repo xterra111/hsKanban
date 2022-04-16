@@ -17,13 +17,13 @@ const taskCards = [
 
 const data = {
 	columns: {
-		"column-1": {
+		column1: {
 			id: "column-1",
-			title: "Backlog",
+			title: "Simple",
 			taskCards,
 		},
 	},
-	columnIds: ["column-1"],
+	columnIds: ["column1"],
 };
 
 export default data;
