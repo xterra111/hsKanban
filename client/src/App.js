@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Column from "./components/Column/Column";
 import datastore from "././mock/datastore";
@@ -12,6 +12,8 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { DragDropContext } from "react-beautiful-dnd";
 
+import axios from "axios";
+
 // Set the Styling for the List creation portion
 
 const useStyles = makeStyles((theme) => ({
@@ -22,8 +24,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function App() {
-	const [data, setData] = useState(datastore);
-
 	// Set the styling for the Add List portion
 	const addListStyles = useStyles();
 
@@ -54,22 +54,30 @@ function App() {
 	const newAddColumn = (heading) => {
 		//console.log(heading, columnId);
 		const newAddColumnId = uuidv4();
+		//const newAddColumnId = heading;
 		//console.log(newAddColumnId);
 		const newColumn = {
 			id: newAddColumnId,
+			//id: heading,
 			title: heading,
 			taskCards: [],
 		};
 		// const column = data.columns[columnId];
 		// column.taskCards.push(newTaskCard);
+		//console.log(data.columnIds);
+		//console.log(newAddColumnId);
+		console.log(newColumn);
 
 		const refreshedData = {
 			columnIds: [...data.columnIds, newAddColumnId],
+			//columnIds: [columnIDS, newAddColumnId],
 			columns: {
 				...data.columns,
 				[newAddColumnId]: newColumn,
 			},
 		};
+		console.log(refreshedData);
+		//setData(refreshedData);
 		setData(refreshedData);
 	};
 
@@ -122,19 +130,72 @@ function App() {
 		}
 	};
 
-	return (
-		<DragDropContext onDragEnd={handleOnDragEnd}>
-			<ContextHandler.Provider value={{ newAddTask, newAddColumn }}>
-				<div className={addListStyles.root}>
-					{data.columnIds.map((columnId) => {
-						const column = data.columns[columnId];
-						return <Column column={column} key={columnId} />;
-					})}
+	//const [data, setData] = useState( datastore );
+	const [data, setData] = useState([]);
+	//const [dataDB, setDataDB] = useState([]);
+	const [columnIDS, setColumnIDS] = useState([]);
+	//const [data, setData] = useState([]);
 
-					<AddTaskCardHolder itemtype="column" />
-				</div>
-			</ContextHandler.Provider>
-		</DragDropContext>
+	const [loaded, setLoaded] = useState(false);
+
+	useEffect(() => {
+		axios
+			.get("http://localhost:8000/api/alltaskcards")
+			.then((res) => {
+				//console.log(res.data.columns);
+				// eslint-disable-next-line no-lone-blocks
+				{
+					res.data.map((task) => {
+						console.log(task.columnIds);
+						//setDataDB(task);
+
+						setData(task);
+						setColumnIDS(task.columnIds);
+						setLoaded(true);
+					});
+				}
+			})
+
+			.catch((err) => {
+				console.log(err);
+			});
+	}, []);
+	return (
+		{ loaded } && (
+			<DragDropContext onDragEnd={handleOnDragEnd}>
+				<ContextHandler.Provider value={{ newAddTask, newAddColumn }}>
+					<div className={addListStyles.root}>
+						{/* {dataDB.columns.map((columnId) => {
+							console.log(columnId);
+							return (
+								<Column
+									key={columnId}
+									columnId={columnId}
+									title={data.columns[columnId].title}
+									taskCards={data.columns[columnId].taskCards}
+								/>
+							);
+						})} */}
+						{/* {data.columnIds.map((columnId) => {
+							const column = data.columns[columnId];
+							console.log(column);
+							return <Column column={column} key={columnId} />;
+						})} */}
+
+						{columnIDS.map((columnId) => {
+							const column = data.columns[columnId];
+							console.log(column);
+							console.log(column.id);
+							console.log(column.title);
+							console.log(columnId);
+							return <Column column={column} key={columnId} />;
+						})}
+
+						<AddTaskCardHolder itemtype="column" />
+					</div>
+				</ContextHandler.Provider>
+			</DragDropContext>
+		)
 	);
 }
 

@@ -20,6 +20,8 @@ const useStyles = makeStyles((theme) => ({
 const AddTaskCardHolder = ({ columnId, itemtype }) => {
 	const addtaskhldr = useStyles();
 	const [expand, setExpand] = useState(false);
+	console.log(columnId);
+	console.log(itemtype);
 	return (
 		<div className={addtaskhldr.addcarddiv}>
 			{/* The below lets you expand the collapse and display the Add Task component
