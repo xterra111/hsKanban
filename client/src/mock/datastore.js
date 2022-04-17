@@ -18,7 +18,7 @@ const taskCards = [
 const data = {
 	columns: {
 		column1: {
-			id: "column-1",
+			id: "column1",
 			title: "Simple",
 			taskCards,
 		},
