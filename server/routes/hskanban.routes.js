@@ -6,4 +6,5 @@ module.exports = (app) => {
 
 	app.post("/api/newcard", HsKanbanController.createHsKanban);
 	app.put("/api/edit/:id", HsKanbanController.updateExistingHSKanban);
+	app.delete("/api/deletecard/:id", HsKanbanController.deleteExistingHSKanban);
 };

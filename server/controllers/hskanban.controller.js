@@ -35,4 +35,19 @@ module.exports = {
 				response.status(400).json(err);
 			});
 	},
+
+	deleteExistingHSKanban: (request, response) => {
+		HsKanban.deleteOne({ _id: request.params.id })
+			.then((result) => {
+				response.json({
+					result,
+				});
+			})
+			.catch((err) => {
+				response.json({
+					message: "arghh you cannot DELETE this one matey",
+					error: err,
+				});
+			});
+	},
 };
