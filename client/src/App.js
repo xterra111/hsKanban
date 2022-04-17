@@ -14,6 +14,8 @@ import { DragDropContext } from "react-beautiful-dnd";
 
 import axios from "axios";
 
+import { useParams } from "react-router-dom";
+
 // Set the Styling for the List creation portion
 
 const useStyles = makeStyles((theme) => ({
@@ -23,9 +25,10 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-function App() {
+function App(props) {
 	// Set the styling for the Add List portion
 	const addListStyles = useStyles();
+	//const { id } = useParams();
 
 	// Add a new list to the data store
 	const newAddTask = (heading, columnId) => {
@@ -40,12 +43,23 @@ function App() {
 		column.taskCards.push(newTaskCard);
 
 		const refreshedData = {
-			...data,
+			//...data,
 			columns: {
 				...data.columns,
 				[columnId]: column,
 			},
 		};
+		console.log(refreshedData);
+		axios
+			.put("http://localhost:8000/api/edit/" + ID, refreshedData)
+			.then((res) => {
+				console.log(res.data);
+				//setListAllPets([...listAllPets, res.data]);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+
 		setData(refreshedData);
 	};
 
@@ -137,6 +151,10 @@ function App() {
 	//const [data, setData] = useState([]);
 
 	const [loaded, setLoaded] = useState(false);
+
+	const ID = data._id;
+
+	console.log(ID);
 
 	useEffect(() => {
 		axios
