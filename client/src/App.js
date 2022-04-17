@@ -2,7 +2,7 @@ import "./App.css";
 import React, { useState, useEffect } from "react";
 
 import Column from "./components/Column/Column";
-import datastore from "././mock/datastore";
+//import datastore from "././mock/datastore";
 import ContextHandler from "./mock/contexthandler";
 
 import { v4 as uuidv4 } from "uuid";
@@ -13,8 +13,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import { DragDropContext } from "react-beautiful-dnd";
 
 import axios from "axios";
-
-import { useParams } from "react-router-dom";
 
 // Set the Styling for the List creation portion
 
@@ -49,20 +47,62 @@ function App(props) {
 				[columnId]: column,
 			},
 		};
-		console.log(refreshedData);
+		console.log(refreshedData + "Before being called in Add Axios");
+		console.log(ID + "ID value -> Before being called in to Add Axios");
 		axios
 			.put("http://localhost:8000/api/edit/" + ID, refreshedData)
 			.then((res) => {
 				console.log(res.data);
-				//setListAllPets([...listAllPets, res.data]);
+				setTest(!test);
+				//setData(refreshedData);
 			})
 			.catch((err) => {
 				console.log(err);
 			});
 
-		setData(refreshedData);
+		//setData(refreshedData);
 	};
 
+	const deleteTask = (heading, columnId) => {
+		//console.log(heading, columnId);
+		//const newAddTaskId = uuidv4();
+		console.log(heading);
+		// const newTaskCard = {
+		// 	id: newAddTaskId,
+		// 	heading: heading,
+		// };
+		const column = data.columns[columnId];
+		console.log(column);
+		const columnTaskCardRemoved = column.taskCards.filter(
+			(taskCard) => taskCard.heading !== heading
+		);
+		console.log(columnTaskCardRemoved);
+
+		const columnpostdelete = data.columns[columnId];
+		columnpostdelete.taskCards = columnTaskCardRemoved;
+
+		console.log(columnpostdelete);
+
+		const refreshedData = {
+			//...data,
+			columns: {
+				...data.columns,
+				[columnId]: columnpostdelete,
+			},
+		};
+		console.log(refreshedData);
+		axios
+			.put("http://localhost:8000/api/edit/" + ID, refreshedData)
+			.then((res) => {
+				console.log(res.data);
+				setTest(!test);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+
+		//setData(refreshedData);
+	};
 	// Add a new column to the data store
 
 	const newAddColumn = (heading) => {
@@ -148,6 +188,8 @@ function App(props) {
 	const [data, setData] = useState([]);
 	//const [dataDB, setDataDB] = useState([]);
 	const [columnIDS, setColumnIDS] = useState([]);
+
+	const [test, setTest] = useState(false);
 	//const [data, setData] = useState([]);
 
 	const [loaded, setLoaded] = useState(false);
@@ -168,6 +210,7 @@ function App(props) {
 						//setDataDB(task);
 
 						setData(task);
+						setTest(true);
 						setColumnIDS(task.columnIds);
 						setLoaded(true);
 					});
@@ -177,11 +220,12 @@ function App(props) {
 			.catch((err) => {
 				console.log(err);
 			});
-	}, []);
+	}, [test]);
 	return (
 		{ loaded } && (
 			<DragDropContext onDragEnd={handleOnDragEnd}>
-				<ContextHandler.Provider value={{ newAddTask, newAddColumn }}>
+				<ContextHandler.Provider
+					value={{ newAddTask, newAddColumn, deleteTask }}>
 					<div className={addListStyles.root}>
 						{/* {dataDB.columns.map((columnId) => {
 							console.log(columnId);
