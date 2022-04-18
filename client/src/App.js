@@ -175,7 +175,17 @@ function App(props) {
 					[sourceColumn.id]: destinationColumn,
 				},
 			};
-			setData(refreshedData);
+			//setData(refreshedData);
+			axios
+				.put("http://localhost:8000/api/edit/" + ID, refreshedData)
+				.then((res) => {
+					console.log(res.data);
+					setTest(!test);
+					//setData(refreshedData);
+				})
+				.catch((err) => {
+					console.log(err);
+				});
 		} else {
 			sourceColumn.taskCards.splice(source.index, 1);
 			destinationColumn.taskCards.splice(
@@ -192,7 +202,18 @@ function App(props) {
 					[destinationColumn.id]: destinationColumn,
 				},
 			};
-			setData(refreshedData);
+			//setData( refreshedData );
+
+			axios
+				.put("http://localhost:8000/api/edit/" + ID, refreshedData)
+				.then((res) => {
+					console.log(res.data);
+					setTest(!test);
+					//setData(refreshedData);
+				})
+				.catch((err) => {
+					console.log(err);
+				});
 		}
 	};
 
