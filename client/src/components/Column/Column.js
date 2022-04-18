@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Column = ({ column }) => {
 	const paperStyle = useStyles();
+
 	return (
 		<div>
 			<Paper className={paperStyle.root}>
@@ -26,7 +27,12 @@ const Column = ({ column }) => {
 					{(provided) => (
 						<div ref={provided.innerRef} {...provided.droppableProps}>
 							{column.taskCards.map((taskcard, index) => (
-								<TaskCard key={taskcard.id} taskcard={taskcard} index={index} />
+								<TaskCard
+									key={taskcard.id}
+									taskcard={taskcard}
+									index={index}
+									columnId={column.id}
+								/>
 							))}
 							{provided.placeholder}
 						</div>
