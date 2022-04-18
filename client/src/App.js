@@ -131,8 +131,20 @@ function App(props) {
 			},
 		};
 		console.log(refreshedData);
+		console.log("Before being called in Add Axios");
 		//setData(refreshedData);
-		setData(refreshedData);
+		//setData(refreshedData);
+
+		axios
+			.put("http://localhost:8000/api/edit/" + ID, refreshedData)
+			.then((res) => {
+				console.log(res.data);
+				setTest(!test);
+				//setData(refreshedData);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 	};
 
 	const handleOnDragEnd = (result) => {
