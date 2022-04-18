@@ -4,7 +4,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Draggable } from "react-beautiful-dnd";
 
 import { Button } from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Delete";
+
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 
 import ContextHandler from "../../mock/contexthandler";
 
@@ -13,6 +14,34 @@ const useStyles = makeStyles((theme) => ({
 		padding: theme.spacing(1, 1, 1, 1),
 		margin: theme.spacing(1),
 		display: "flex",
+	},
+	deleteButton: {
+		//margin: theme.spacing(0, 0, 0, 10),
+		display: "flex",
+		cursor: "pointer",
+		borderRadius: "10%",
+		//width: "8px",
+		align: "right",
+		//background: "lightblue",
+		// palette: {
+		// 	primary: "#009688",
+		// 	secondary: "#ff3d00",
+		// },
+	},
+	carddeldiv: {
+		margin: theme.spacing(0, 0, 0, 1),
+		display: "flex",
+		flexDirection: "row",
+		justifyContent: "flex-end",
+		alignItems: "right",
+	},
+	cardtitlediv: {
+		margin: theme.spacing(0, 0, 0, 0),
+		paddingRight: theme.spacing(5),
+		display: "flex",
+		width: "90%",
+		// flexDirection: "row",
+		// width: "300px",
 	},
 }));
 
@@ -41,23 +70,16 @@ const TaskCard = ({ taskcard, index, columnId, itemtype }) => {
 					{...provided.dragHandleProps}>
 					{/* Displaying the Card heading here */}
 					<Paper className={cardTaskStyle.cardTask}>
-						{taskcard.heading}
-						<button
-							startIcon={<DeleteIcon />}
-							variant="contained"
-							color="secondary"
-							style={{
-								backgroundColor: "#ff0000",
-								borderRadius: "50%",
-								padding: "5px",
-								margin: "5px",
-								width: "20px",
-								height: "20px",
-								border: "none",
-								outline: "none",
-								cursor: "pointer",
-							}}
-							onClick={onDeleteBtnClick}></button>
+						<div className={cardTaskStyle.cardtitlediv}>{taskcard.heading}</div>
+
+						<div className={cardTaskStyle.carddiv}>
+							<Button
+								className={cardTaskStyle.deleteButton}
+								startIcon={<DeleteForeverIcon />}
+								variant="transparent"
+								color="#ff3d00"
+								onClick={onDeleteBtnClick}></Button>
+						</div>
 					</Paper>
 				</div>
 			)}
